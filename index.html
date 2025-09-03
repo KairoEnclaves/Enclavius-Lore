@@ -1,11 +1,15 @@
 <style>
+  body {
+    background-color: #121212; /* dark theme */
+    color: #f0f0f0;           /* light text for readability */
+    font-family: sans-serif;
+  }
+
   .canva-embed {
     position: relative;
     width: 25%;       /* default: 25% of screen */
-    max-width: 100%;  /* safety cap */
+    max-width: 100%;
     margin: 1.6em auto;
-    box-shadow: 0 2px 8px rgba(63,69,81,0.16);
-    border-radius: 8px;
     overflow: hidden;
   }
 
@@ -27,8 +31,16 @@
   /* On small screens (mobile) */
   @media (max-width: 768px) {
     .canva-embed {
-      width: 100%; /* override: full width on mobile */
+      width: 100%; /* full width on mobile */
     }
+  }
+
+  a {
+    color: #66ccff; /* light blue link for contrast */
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 </style>
 
