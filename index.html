@@ -1,47 +1,46 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>My Webcomic</title>
-  <style>
-    /* Page baseline */
-    html, body {
-      margin: 0;
-      background: #0e0e0f;
-      color: #eaeaea;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    }
+<style>
+  .canva-embed {
+    position: relative;
+    width: 25%;       /* default: 25% of screen */
+    max-width: 100%;  /* safety cap */
+    margin: 1.6em auto;
+    box-shadow: 0 2px 8px rgba(63,69,81,0.16);
+    border-radius: 8px;
+    overflow: hidden;
+  }
 
-    /* Center the embed and prevent desktop oversizing */
-    .embed-wrapper {
-      max-width: 900px;      /* ← Adjust to taste (800–1000px works well) */
-      width: 80%;
-      margin: 0 auto;
-      padding: 1rem;
-      box-sizing: border-box;
-    }
+  .canva-embed::before {
+    content: "";
+    display: block;
+    padding-top: 2516.9107%; /* keeps aspect ratio */
+  }
 
-    /* Make the iframe fill the viewport height but stay within the wrapper width */
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100vh;         /* Full viewport height */
-      border: 0;
-    }
+  .canva-embed iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+  }
 
-    /* Optional: reduce initial height on small phones so browser UI doesn’t overlap */
-    @media (max-width: 420px) {
-      iframe { height: 90vh; }
+  /* On small screens (mobile) */
+  @media (max-width: 768px) {
+    .canva-embed {
+      width: 100%; /* override: full width on mobile */
     }
-  </style>
-</head>
-<body>
-<div style="position: relative; width: 100%; height: 0; padding-top: 2516.9107%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAGvAulzNS0/Pm_n-h3RdL6NG6xHcbu4LQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  }
+</style>
+
+<div class="canva-embed">
+  <iframe loading="lazy"
+    src="https://www.canva.com/design/DAGvAulzNS0/Pm_n-h3RdL6NG6xHcbu4LQ/view?embed"
+    allowfullscreen>
   </iframe>
 </div>
-<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGvAulzNS0&#x2F;Pm_n-h3RdL6NG6xHcbu4LQ&#x2F;view?utm_content=DAGvAulzNS0&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">The Tale of Enclavius Primus</a> door KairoEnclaves
+
+<p>
+  <a href="https://www.canva.com/design/DAGvAulzNS0/Pm_n-h3RdL6NG6xHcbu4LQ/view?utm_content=DAGvAulzNS0&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">
+    The Tale of Enclavius Primus
+  </a> door KairoEnclaves
+</p>
