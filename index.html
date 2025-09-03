@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Webcomic</title>
+  <style>
+    /* Page baseline */
+    html, body {
+      margin: 0;
+      background: #0e0e0f;
+      color: #eaeaea;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Center the embed and prevent desktop oversizing */
+    .embed-wrapper {
+      max-width: 900px;      /* ← Adjust to taste (800–1000px works well) */
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    /* Make the iframe fill the viewport height but stay within the wrapper width */
+    iframe {
+      display: block;
+      width: 100%;
+      height: 100vh;         /* Full viewport height */
+      border: 0;
+    }
+
+    /* Optional: slightly wider on very large monitors */
+    @media (min-width: 1200px) {
+      .embed-wrapper { max-width: 980px; }
+    }
+
+    /* Optional: reduce initial height on small phones so browser UI doesn’t overlap */
+    @media (max-width: 420px) {
+      iframe { height: 90vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="embed-wrapper">
+    <iframe
+      src="https://www.canva.com/design/DAGvAulzNS0/vgT8qpByJAn2jdLQnZzG_g/view"
+      allowfullscreen="true"
+      loading="lazy"
+      referrerpolicy="no-referrer">
+    </iframe>
+  </div>
+</body>
+</html>
