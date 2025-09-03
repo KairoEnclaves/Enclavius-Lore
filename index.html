@@ -1,64 +1,346 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>The Tale of Enclavius Primus</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="utf-8" />
+  <title>Enclavius Lore – Stories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://i.gyazo.com/f55b23b0ddcdc810e7df30522a408e57.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet">
   <style>
+    :root {
+      --bg: #f4f1ed;
+      /* keep background */
+      --fg: #121212;
+      --muted: #6a6a6a;
+      --accent: #7c1700;
+      --accent-2: #a11f05;
+      --card-bg: #ffffff;
+      --border: #e6e0da;
+      --link: #1b4b91;
+      --radius: 14px;
+      --shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    }
+
+    html,
     body {
-      background-color: #f4f1ed; /* dark theme */
-      color: #f0f0f0;
-      font-family: sans-serif;
+      height: 100%
+    }
+
+    body {
       margin: 0;
-      padding: 20px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
 
-    .canva-embed {
-      position: relative;
-      width: 500px;       /* desktop: 25% width */
-      max-width: 100%;
-      margin: 1.6em auto;
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 24px;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
       overflow: hidden;
+      box-shadow: var(--shadow);
+      outline: 1px solid rgba(0, 0, 0, .06);
+      background: #fff;
     }
 
-    .canva-embed::before {
-      content: "";
-      display: block;
-      padding-top: 2516.9107%; /* maintain Canva aspect ratio */
-    }
-
-    .canva-embed iframe {
-      position: absolute;
+    .logo img {
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
-      border: none;
+      object-fit: cover;
+      display: block;
     }
 
-    @media (max-width: 768px) {
-      .canva-embed {
-        width: 100%; /* full width on mobile */
-      }
+    header h1 {
+      font-family: Cinzel, serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      line-height: 1.2;
+      margin: 0 0 6px;
+      letter-spacing: .3px;
+    }
+
+    .tagline {
+      margin: 0 auto 20px;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      position: relative;
+      flex: 1 1 320px;
+      max-width: 420px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--fg);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 12px 20px 40px
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, box-shadow .2s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .12)
+    }
+
+    .cover {
+      position: relative;
+      height: 160px;
+      background: #ecd8d3;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, .22) 100%);
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 999px;
+    }
+
+    .content {
+      padding: 16px 16px 6px
+    }
+
+    .title {
+      margin: 0 0 6px;
+      font-weight: 600;
+      font-size: 1.05rem
+    }
+
+    .subtitle {
+      margin: 0;
+      color: #5a554f;
+      font-size: .92rem
+    }
+
+    .meta {
+      margin: 10px 16px 0;
+      color: #8b837b;
+      font-size: .8rem
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 16px;
+      margin-top: auto;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: filter .15s ease, transform .05s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      color: #fff;
+    }
+
+    .btn-ghost {
+      background: #f7f3ef;
+      border: 1px solid var(--border);
+      color: #2b2a29;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 22px;
+      background: #222;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
     }
 
     a {
-      color: #66ccff;
-      text-decoration: none;
+      color: var(--link);
     }
-    a:hover {
-      text-decoration: underline;
+
+    footer {
+      color: #867e76;
+      font-size: .9rem;
+      padding: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
     }
   </style>
 </head>
 
 <body>
-  <div class="canva-embed">
-    <iframe loading="lazy"
-      src="https://www.canva.com/design/DAGvAulzNS0/Pm_n-h3RdL6NG6xHcbu4LQ/view?embed"
-      >
-    </iframe>
-  </div>
+  <header>
+    <div class="brand">
+      <div class="logo">
+        <img src="https://i.gyazo.com/05e06650b217d7c2993eb5fab466290e.png" alt="Enclavius Logo" />
+      </div>
+      <h1>Enclavius Lore</h1>
+    </div>
+    <p class="tagline">Explore the chronicles of Gens Enclavius. Choose a story to begin.</p>
+
+    <div class="toolbar">
+      <div class="search">
+        <input id="q" type="search" placeholder="Search stories by title…" aria-label="Search stories" />
+      </div>
+      <div class="count" id="count"></div>
+    </div>
+  </header>
+
+  <main>
+    <div id="story-grid" class="grid" aria-live="polite"></div>
+  </main>
+
+  <footer>
+    © Gens Enclavius 2025
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Link copied</div>
+
+  <script src="./js/stories.js"></script>
+  <script>
+    const stories = (window.STORIES || []).map(s => ({
+      slug: s.slug, title: s.title, subtitle: s.subtitle || "",
+      cover: s.cover || "", badge: s.badge || ""
+    }));
+    const grid = document.getElementById('story-grid');
+    const countEl = document.getElementById('count');
+    const q = document.getElementById('q');
+    const toast = document.getElementById('toast');
+
+    function cardHTML(s) {
+      const href = `./stories/${encodeURIComponent(s.slug)}.html`;
+      const abs = new URL(href, location.href).href;
+      const coverStyle = s.cover ? `style="background-image:url('${s.cover.replace(/"/g, '&quot;')}')"` : `style="background-image:linear-gradient(135deg,#ecd8d3, #f0e6df)"`;
+      return `
+        <article class="card">
+          <div class="cover" ${coverStyle}>${s.badge ? `<span class="badge">${s.badge}</span>` : ""}</div>
+          <div class="content">
+            <h3 class="title">${s.title}</h3>
+            ${s.subtitle ? `<p class="subtitle">${s.subtitle}</p>` : ""}
+          </div>
+          <div class="meta">/stories/${s.slug}.html</div>
+          <div class="actions">
+            <a class="btn btn-primary" href="${href}">Read</a>
+            <button class="btn btn-ghost" data-share="${abs}" type="button">Copy link</button>
+          </div>
+        </article>
+      `;
+    }
+    function render(list) {
+      grid.innerHTML = list.map(cardHTML).join('');
+      countEl.textContent = `${list.length} ${list.length === 1 ? "story" : "stories"}`;
+      grid.querySelectorAll('[data-share]').forEach(btn => {
+        btn.addEventListener('click', async e => {
+          const url = e.currentTarget.getAttribute('data-share');
+          try { await navigator.clipboard.writeText(url); showToast("Link copied"); }
+          catch { showToast("Copy failed"); }
+        });
+      });
+    }
+    function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1400); }
+    function filter() {
+      const term = (q.value || "").trim().toLowerCase();
+      if (!term) return render(stories);
+      const filtered = stories.filter(s => s.title.toLowerCase().includes(term) || (s.subtitle && s.subtitle.toLowerCase().includes(term)));
+      render(filtered);
+    }
+    q.addEventListener('input', filter);
+    render(stories);
+  </script>
 </body>
+
 </html>
