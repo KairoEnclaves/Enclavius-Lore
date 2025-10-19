@@ -11,7 +11,7 @@ window.STORIES = [
     slug: "invictus",
     title: "The Tale of Invictus",
     subtitle: "How Gens Enclavius came to be reborn.",
-    cover: "https://i.gyazo.com/036674aba044ffaad9ac1b279d3ad564.png", // optional
+    cover: "https://i.gyazo.com/8dc013025889f3600b4966a5cbf2f60f.png", // optional
     badge: "" // optional (example: "New")
   },
   // Add more stories:
