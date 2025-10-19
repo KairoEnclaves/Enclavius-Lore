@@ -2,52 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title><!-- REPLACE --> Story Title – Enclavius Lore</title>
+  <title>The Tale of Invictus – Enclavius Lore</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root { --bg:#121212; --fg:#eaeaea; --link:#66ccff; }
+    :root { --bg:#f4f1ed; --fg:#121212; --link:#66ccff; }
     html, body { height:100%; }
-    body {
-      margin:0; background:var(--bg); color:var(--fg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      padding: 20px;
-    }
-    .topbar {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-    }
-    .home-btn {
-      display:inline-block; padding:8px 12px; border:1px solid #2a2a2a; border-radius:10px;
-      text-decoration:none; color:var(--fg);
-    }
-    .title { margin: 0; font-size: 1.1rem; opacity:.9 }
-    .canva-embed {
-      position: relative;
-      width: 25vw;              /* desktop: ~25% of viewport width */
-      max-width: 700px;         /* cap */
-      margin: 16px auto;        /* center */
-      overflow: hidden;
-    }
-    /* Keep aspect ratio; adjust % if your Canva has a different ratio */
-    .canva-embed::before { content:""; display:block; padding-top: 2516.9107%; }
-    .canva-embed iframe {
-      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
-      background:#0d0d0d; /* looks nice while Canva loads */
-    }
-    @media (max-width: 768px) {
-      .canva-embed { width: 100%; }
-    }
+    body { margin:0; background:var(--bg); color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:20px; }
+    .topbar { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .home-btn { padding:8px 12px; border:1px solid #2a2a2a; border-radius:10px; text-decoration:none; color:var(--fg); }
+    .title { margin:0; font-size:1.1rem; opacity:.9 }
+    .canva-embed { position:relative; width:450px; margin:16px auto; overflow:hidden; }
+    .canva-embed::before { content:""; display:block; padding-top:2516.9107%; }
+    .canva-embed iframe { position:absolute; inset:0; width:100%; height:100%; border:0; background:#0d0d0d; }
+    @media (max-width:768px){ .canva-embed{ width:100%; } }
     a { color: var(--link); }
   </style>
 </head>
 <body>
   <nav class="topbar">
     <a class="home-btn" href="../">← Home</a>
-    <h1 class="title"><!-- REPLACE --> Story Title</h1>
   </nav>
 
   <div class="canva-embed">
     <iframe loading="lazy"
-      src="<!-- REPLACE WITH YOUR CANVA EMBED URL, e.g.: https://www.canva.com/design/.../view?embed -->"
+      src="https://www.canva.com/design/DAGx7kTcs_4/L5XIteMELszfbvWNMRmnJA/view?embed"
       allowfullscreen></iframe>
   </div>
 </body>
