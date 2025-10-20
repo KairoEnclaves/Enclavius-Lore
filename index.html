@@ -144,6 +144,43 @@
     footer {
       color: #867e76; font-size: .9rem; padding: 20px; max-width: 1100px; margin: 0 auto; width: 100%;
     }
+
+    /* ===== Mobile-only tweaks (phones) ===== */
+@media (max-width: 767px) {
+  /* Comfortable full-card swipe rows, no layout changes on desktop */
+  .row {
+    gap: 14px;
+    padding: 6px 4px 10px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Make cards larger on phones; desktop rules remain intact */
+  .card {
+    min-width: 86vw;
+    max-width: 86vw;
+    cursor: pointer;
+    border: none;           /* keep flat look */
+    box-shadow: none;
+  }
+
+  /* Taller cover on phones for better visual balance */
+  .cover {
+    height: 48vw;
+  }
+
+  /* Hide the path-like meta line to save vertical space */
+  .meta {
+    display: none;
+  }
+
+  /* Buttons fill width nicely for tapping */
+  .actions .btn {
+    flex: 1;
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 

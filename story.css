@@ -1,0 +1,69 @@
+/* ---------------------------------------------------
+   Shared styling for all Enclavius Lore story pages
+   --------------------------------------------------- */
+
+:root {
+  --bg:#0d1117;
+  --fg:#e9e6e1;
+  --link:#8ec5ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ===== Desktop/Tablet defaults (iPad behaves like desktop) ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  padding: 20px;                 /* desktop/tablet padding */
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.home-btn {
+  padding: 8px 12px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+a { color: var(--link); }
+
+/* Canva embed — desktop/tablet baseline */
+.canva-embed {
+  position: relative;
+  width: 700px;                  /* iPad/tablet uses this too */
+  margin: 16px auto;
+  overflow: hidden;
+  aspect-ratio: 1 / 23;          /* matches your working ratio */
+}
+
+.canva-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
+}
+
+/* ===== Phone overrides (<768px) ===== */
+@media (max-width: 767px) {
+  html, body {
+    padding: 0;                  /* you said this fixes it on mobile */
+  }
+  .topbar { padding: 12px; }     /* small breathing room for the back button */
+  .canva-embed {
+    width: 100%;                 /* full width on phones */
+    margin: 0 auto;
+    aspect-ratio: 1 / 35;        /* your working mobile ratio */
+  }
+}
