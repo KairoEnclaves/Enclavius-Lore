@@ -190,85 +190,103 @@
   <div id="toast" class="toast" role="status" aria-live="polite">Link copied</div>
 
   <script src="./js/stories.js"></script>
-  <script>
-    // Normalize incoming stories (accepts missing 'category' => default 'core')
-    const stories = (window.STORIES || []).map(s => ({
-      slug: s.slug,
-      title: s.title,
-      subtitle: s.subtitle || "",
-      cover: s.cover || "",
-      badge: s.badge || "",
-      category: (s.category || "core").toLowerCase()
-    }));
+<script>
+  // Normalize stories
+  const stories = (window.STORIES || []).map(s => ({
+    slug: s.slug,
+    title: s.title,
+    subtitle: s.subtitle || "",
+    cover: s.cover || "",
+    badge: s.badge || "",
+    category: (s.category || "core").toLowerCase()
+  }));
 
-    const rowCore = document.getElementById('row-core');
-    const rowExpansion = document.getElementById('row-expansion');
-    const countCore = document.getElementById('count-core');
-    const countExpansion = document.getElementById('count-expansion');
-    const totalCount = document.getElementById('total-count');
-    const q = document.getElementById('q');
-    const toast = document.getElementById('toast');
+  const rowCore = document.getElementById('row-core');
+  const rowExpansion = document.getElementById('row-expansion');
+  const countCore = document.getElementById('count-core');
+  const countExpansion = document.getElementById('count-expansion');
+  const totalCount = document.getElementById('total-count');
+  const q = document.getElementById('q');
+  const toast = document.getElementById('toast');
 
-    function cardHTML(s) {
-      const href = `./stories/${encodeURIComponent(s.slug)}.html`;
-      const abs = new URL(href, location.href).href;
-      const coverStyle = s.cover
-        ? `style="background-image:url('${s.cover.replace(/"/g, '&quot;')}')"`
-        : `style="background-image:linear-gradient(135deg,#ecd8d3, #f0e6df)"`;
-      return `
-        <article class="card">
-          <div class="cover" ${coverStyle}>${s.badge ? `<span class="badge">${s.badge}</span>` : ""}</div>
-          <div class="content">
-            <h3 class="title">${s.title}</h3>
-            ${s.subtitle ? `<p class="subtitle">${s.subtitle}</p>` : ""}
-          </div>
-          <div class="meta">/stories/${s.slug}.html</div>
-          <div class="actions">
-            <a class="btn btn-primary" href="${href}">Read</a>
-            <button class="btn btn-ghost" data-share="${abs}" type="button">Copy link</button>
-          </div>
-        </article>
-      `;
-    }
+  function cardHTML(s) {
+    const href = `./stories/${encodeURIComponent(s.slug)}.html`;
+    const abs = new URL(href, location.href).href;
+    const coverStyle = s.cover
+      ? `style="background-image:url('${s.cover.replace(/"/g, '&quot;')}')"`
+      : `style="background-image:linear-gradient(135deg,#ecd8d3, #f0e6df)"`;
+    return `
+      <article class="card" data-href="${href}" role="link" tabindex="0">
+        <div class="cover" ${coverStyle}>
+          ${s.badge ? `<span class="badge">${s.badge}</span>` : ""}
+        </div>
+        <div class="content">
+          <h3 class="title">${s.title}</h3>
+          ${s.subtitle ? `<p class="subtitle">${s.subtitle}</p>` : ""}
+        </div>
+        <div class="meta">/stories/${s.slug}.html</div>
+        <div class="actions">
+          <a class="btn btn-primary" href="${href}">Read</a>
+          <button class="btn btn-ghost" data-share="${abs}" type="button">Copy link</button>
+        </div>
+      </article>
+    `;
+  }
 
-    function renderRows(list) {
-      const term = (q.value || "").trim().toLowerCase();
-      const matches = term
-        ? list.filter(s =>
-            s.title.toLowerCase().includes(term) ||
-            (s.subtitle && s.subtitle.toLowerCase().includes(term))
-          )
-        : list;
+  function renderRows(list) {
+    const term = (q.value || "").trim().toLowerCase();
+    const matches = term
+      ? list.filter(s =>
+          s.title.toLowerCase().includes(term) ||
+          (s.subtitle && s.subtitle.toLowerCase().includes(term))
+        )
+      : list;
 
-      const core = matches.filter(s => s.category === 'core');
-      const expansion = matches.filter(s => s.category === 'expansion');
+    const core = matches.filter(s => s.category === 'core');
+    const expansion = matches.filter(s => s.category === 'expansion');
 
-      rowCore.innerHTML = core.map(cardHTML).join('');
-      rowExpansion.innerHTML = expansion.map(cardHTML).join('');
+    rowCore.innerHTML = core.map(cardHTML).join('');
+    rowExpansion.innerHTML = expansion.map(cardHTML).join('');
 
-      // Rebind copy buttons
-      document.querySelectorAll('[data-share]').forEach(btn => {
-        btn.addEventListener('click', async e => {
-          const url = e.currentTarget.getAttribute('data-share');
-          try { await navigator.clipboard.writeText(url); showToast("Link copied"); }
-          catch { showToast("Copy failed"); }
-        });
+    // Enable full-card click navigation
+    document.querySelectorAll('.card[data-href]').forEach(card => {
+      const link = card.getAttribute('data-href');
+      card.addEventListener('click', e => {
+        // Avoid intercepting button clicks inside the card
+        if (e.target.closest('button') || e.target.closest('a')) return;
+        window.location.href = link;
       });
+      card.addEventListener('keypress', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          window.location.href = link;
+        }
+      });
+      card.style.cursor = 'pointer';
+    });
 
-      // Counts
-      countCore.textContent = `${core.length} ${core.length === 1 ? "story" : "stories"}`;
-      countExpansion.textContent = `${expansion.length} ${expansion.length === 1 ? "story" : "stories"}`;
-      totalCount.textContent = `${matches.length} ${matches.length === 1 ? "result" : "results"}`;
-    }
+    // Rebind copy buttons
+    document.querySelectorAll('[data-share]').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        const url = e.currentTarget.getAttribute('data-share');
+        try { await navigator.clipboard.writeText(url); showToast("Link copied"); }
+        catch { showToast("Copy failed"); }
+      });
+    });
 
-    function showToast(msg) {
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1400);
-    }
+    // Counts
+    countCore.textContent = `${core.length} ${core.length === 1 ? "story" : "stories"}`;
+    countExpansion.textContent = `${expansion.length} ${expansion.length === 1 ? "story" : "stories"}`;
+    totalCount.textContent = `${matches.length} ${matches.length === 1 ? "result" : "results"}`;
+  }
 
-    q.addEventListener('input', () => renderRows(stories));
-    renderRows(stories);
-  </script>
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1400);
+  }
+
+  q.addEventListener('input', () => renderRows(stories));
+  renderRows(stories);
+</script>
 </body>
 </html>
